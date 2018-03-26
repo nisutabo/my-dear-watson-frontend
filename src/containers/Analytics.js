@@ -1,8 +1,15 @@
 import React from 'react'
+//import Analysis from './components/Analysis'
 
 export default class Analytics extends React.Component {
 
-    get
+  constructor (){
+    super()
+    this.state = {
+      analytic: ''
+    }
+  }
+
 
   render(){
     return (

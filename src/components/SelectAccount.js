@@ -2,7 +2,7 @@ import React from 'react';
 
 
 
-const Select = ({ accounts, setCurrentAccount }) => {
+const SelectAccount = ({ accounts, setCurrentAccount }) => {
 
 
       return (
@@ -16,9 +16,9 @@ const Select = ({ accounts, setCurrentAccount }) => {
 
 }
 
-Select.defaultProps = {
+SelectAccount.defaultProps = {
   accounts: [],
   handleChange: function () {}
 }
 
-export default Select;
+export default SelectAccount;

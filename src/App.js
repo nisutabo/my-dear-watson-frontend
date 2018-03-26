@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import Home from './containers/Home'
-import Select from './components/Select'
+import SelectAccount from './components/SelectAccount'
+import SelectAttribute from './components/SelectAttribute'
 import Analytics from './containers/Analytics'
 import './App.css';
+
+const URL = 'http://localhost:9000/api/v1/'
 
 class App extends Component {
   constructor(){
     super()
     this.state = {
       accounts: [],
-      currentAccount: ''
+      attributes: ['personality', 'need', 'value', 'consumption_preference'],
+      currentAccount: '',
+      currentAttribute: 'personality'
     }
   }
 
@@ -19,12 +24,19 @@ class App extends Component {
   }
 
   fetchTwitterAccounts(){
-    fetch('http://localhost:9000/api/v1/twitter_accounts')
+    fetch(URL + 'twitter_accounts')
     .then(resp => resp.json())
     .then(json => this.setState({
       accounts: json
     }))
   }
+
+  fetchAnalysis(){
+    fetch(URL + 'twitter_accounts' + `/${this.state.currentAccount}` + `/${this.state.currentAttribute}`)
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+  }
+
 
   setCurrentAccount = event => {
     this.setState({
@@ -32,13 +44,21 @@ class App extends Component {
     })
   }
 
+  setCurrentAttribute = event => {
+    this.setState({
+      currentAttribute: event.target.value
+    })
+    this.fetchAnalysis()
+  }
+
 
   render(){
     console.log(this.state.currentAccount)
     return (
       <div>
-        <Select accounts={this.state.accounts} setCurrentAccount={this.setCurrentAccount}/>
-        <Home accounts={this.state.accounts}/>
+        <SelectAccount accounts={this.state.accounts} setCurrentAccount={this.setCurrentAccount}/>
+        <SelectAttribute attributes={this.state.attributes} setCurrentAttribute={this.setCurrentAttribute}/>
+        <Home currentAccount={this.state.currentAccount} currentAttribute={this.state.currentAttribute}/>
         <Analytics currentAccount={this.state.currentAccount}/>
       </div>
     )
