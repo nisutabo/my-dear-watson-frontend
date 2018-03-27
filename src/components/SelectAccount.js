@@ -18,7 +18,6 @@ const SelectAccount = ({ accounts, setCurrentAccount }) => {
 
 SelectAccount.defaultProps = {
   accounts: [],
-  handleChange: function () {}
 }
 
 export default SelectAccount;

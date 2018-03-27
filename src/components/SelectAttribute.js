@@ -16,8 +16,7 @@ const SelectAttribute = ({ attributes, setCurrentAttribute }) => {
 }
 
 SelectAttribute.defaultProps = {
-  attributes: [],
-  handleChange: function () {}
+  attributes: []
 }
 
 export default SelectAttribute;
