@@ -1,25 +1,39 @@
 import React from 'react'
+import uuid from 'uuid'
 //import Analysis from './components/Analysis'
 const URL = 'http://localhost:9000/api/v1/'
-const Analyze = ({ currentAccount, currentAttribute }) => {
+class Analyze extends React.Component {
 
-
-  const fetchAnalysis = () => {
-    fetch(URL + 'twitter_accounts' + `/${currentAccount}` + `/${currentAttribute}`)
-    .then(resp => resp.json())
-    .then(json => console.log(json))
+  state = {
+    analysis: {}
   }
 
 
 
-    console.log(currentAttribute)
+  fetchAnalysis = () => {
+    fetch(URL + 'twitter_accounts' + `/${this.props.currentAccount}` + `/${this.props.currentAttribute}`)
+    .then(resp => resp.json())
+    .then(json => this.setState({
+      analysis: json
+    }))
+  }
+
+
+
+
+  render(){
+    const analysis = Object.entries(this.state.analysis)
+    const result = analysis.map((key, value) => {
+      return <h3 key={uuid()}>{key}: {value}</h3>
+    })
     return (
       <div>
-        <h1>{currentAttribute}</h1>
-        <button onClick={fetchAnalysis}>analyze</button>
+        <h1>{this.props.currentAttribute}</h1>
+        <button onClick={this.fetchAnalysis}>analyze</button>
+        {result}
       </div>
     )
-
+  }
 }
 
 export default Analyze
