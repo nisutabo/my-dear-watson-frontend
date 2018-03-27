@@ -22,9 +22,11 @@ class Analyze extends React.Component {
 
 
   render(){
+    console.log(this.state.analysis)
     const analysis = Object.entries(this.state.analysis)
-    const result = analysis.map((key, value) => {
-      return <h3 key={uuid()}>{key}: {value}</h3>
+    console.log(analysis)
+    const result = analysis.map((metric) => {
+      return <h3 key={uuid()}>{metric[0]}: {metric[1]}</h3>
     })
     return (
       <div>
