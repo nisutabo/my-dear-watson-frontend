@@ -11,13 +11,13 @@ class Analyze extends React.Component {
 
 
   fetchAnalysis = () => {
-    fetch(URL + 'twitter_accounts' + `/${this.props.currentAccount}` + `/${this.props.currentAttribute}`)
+    console.log(this.props.currentAccount);
+    fetch(URL + 'twitter_accounts' + `/${this.props.currentAccount}` + `/${this.props.currentTrait}`)
     .then(resp => resp.json())
     .then(json => this.setState({
       analysis: json
     }))
   }
-
 
 
 
@@ -28,6 +28,7 @@ class Analyze extends React.Component {
     const result = analysis.map((metric) => {
       return <h3 key={uuid()}>{metric[0]}: {metric[1]}</h3>
     })
+    console.log(result)
     return (
       <div>
         <h1>{this.props.currentAttribute}</h1>

@@ -7,7 +7,7 @@ const SelectAttribute = ({ attributes, setCurrentAttribute }) => {
       return (
         <select onChange={setCurrentAttribute} defaultValue='all'>
           <option value='all'>All</option>
-          {attributes.map(attribute =>
+          {['personality', 'value', 'need', 'consumer_preference'].map(attribute =>
             <option key={attribute} value={attribute}>{attribute}</option>
           )}
         </select>
