@@ -15,6 +15,7 @@ class App extends Component {
   state = {
     accounts: [],
     currentHandle: '',
+    currentID: '',
     currentTrait: ''
   };
 
@@ -58,17 +59,29 @@ class App extends Component {
       });
   }
 
-  setCurrentHandle = account => {
-    this.setState({
-      currentHandle: account
-    });
+  setCurrentHandle = (account) => {
+    if (account.includes('-')){
+      let accountName = account.split('-')[1]
+      let accountID = account.split('-')[0]
+      this.setState({
+        currentID: accountID,
+        currentHandle: accountName,
+      });
+    } else {
+      this.setState({
+        currentHandle: account,
+      });
+    }
+
   }
+
 
   setCurrentAttribute = event => {
     this.setState({
       currentAttribute: event.target.value
     });
   }
+
 
   componentDidMount() {
     this.fetchTwitterAccounts();
@@ -88,30 +101,23 @@ class App extends Component {
 
     let history = createHistory();
     if (this.state.currentHandle !== prevState.currentHandle){
-      history.push(`${this.state.currentHandle}/personality`);
+      history.push(`/analyze/${this.state.currentID}-${this.state.currentHandle}/personality`);
       history.go();
     }
   }
 
   render() {
-
+    console.log(this.state.currentID)
+    console.log(this.state.currentHandle)
     return (
-      <div>
+      <div className='container'>
         <Route exact path="/analyze" render={() => (<Analyze accounts={this.state.accounts} setCurrentHandle={this.setCurrentHandle} />)} />
-        <Route exact path="/analyze/:twitterHandle/:trait" render={props => {
+        <Route exact path="/analyze/:id-:twitterHandle/:trait" render={props => {
           let twitterHandle = props.match.params.twitterHandle;
           let trait = props.match.params.trait;
-
-
-          let twitterId = 0;
-          if (this.state.accounts.find(a => a.handle === this.state.currentHandle)) {
-            let account = this.state.accounts.find(a => a.handle === this.state.currentHandle);
-            twitterId = account.id;
-          }
-          console.log(twitterId)
-          return <TraitPanel twitterHandle={twitterHandle} twitterId={twitterId} trait={trait} />;
+          let id = props.match.params.id;
+          return <TraitPanel twitterHandle={twitterHandle} twitterId={id} trait={trait} />;
         }} />
-
       </div>
     )
   };
@@ -126,6 +132,11 @@ export default App;
 
 // <Route exact path="/" component={Home} />
 // <Route exact path="/analyze/:twitter_handle/:trait/compare" />
+
+// if (this.state.accounts.find(a => a.handle === this.state.currentHandle)) {
+//   let account = this.state.accounts.find(a => a.handle === this.state.currentHandle);
+//   twitterId = account.id;
+// }
 
 
 

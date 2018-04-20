@@ -22,6 +22,17 @@
   font-size: large;
 }
 
+.td-two {
+  align: left;
+  font-size: large;
+  font-weight: bold;
+
+}
+
+.td-one {
+  border-right: 1px solid black;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
