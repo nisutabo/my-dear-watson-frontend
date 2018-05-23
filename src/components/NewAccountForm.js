@@ -103,7 +103,7 @@ class NewAccountForm extends Component {
             <TextField
               hintText='e.g. kanyewest'
               hintStyle={styles.hintStyle}
-              floatingLabelText="Enter New Twitter Account:"
+              floatingLabelText="Add A New Twitter Account:"
               styles={styles.customWidth}
               floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
               floatingLabelFixed={true}
