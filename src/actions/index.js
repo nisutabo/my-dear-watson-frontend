@@ -1,11 +1,11 @@
-
+const URL = 'https://guarded-cliffs-67673.herokuapp.com/api/v1'
 export const fetchAccounts = () => {
     return (dispatch) => {
       dispatch({
         type: 'LOADING'
       })
 
-      return fetch(`http://localhost:9000/api/v1/twitter_accounts`)
+      return fetch(`${URL}/twitter_accounts`)
       .then(resp => resp.json())
       .then(result => {
         let payload = result
@@ -30,7 +30,7 @@ export const fetchAccount1 = (id) => {
 
 
     return (dispatch) => {
-      return fetch(`http://localhost:9000/api/v1/twitter_accounts/${id}`)
+      return fetch(`${URL}/twitter_accounts/${id}`)
       .then(resp => resp.json())
       .then(result => {
         let payload = result
@@ -46,7 +46,7 @@ export const fetchAccount1 = (id) => {
 export const fetchAccount2 = (id) => {
 
     return (dispatch) => {
-      return fetch(`http://localhost:9000/api/v1/twitter_accounts/${id}`)
+      return fetch(`${URL}/twitter_accounts/${id}`)
       .then(resp => resp.json())
       .then(result => {
         let payload = result
@@ -64,7 +64,7 @@ export const fetchAccount2 = (id) => {
         type: 'LOADING'
       })
 
-      return fetch(`http://localhost:9000/api/v1/twitter_accounts`, {
+      return fetch(`${URL}/twitter_accounts`, {
           method: 'POST',
           headers: {Accept: 'application/json',
           'Content-Type': 'application/json'
